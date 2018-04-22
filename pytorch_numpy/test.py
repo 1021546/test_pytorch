@@ -240,12 +240,15 @@ optimizer = optim.SGD(model.parameters(),lr = 0.005, momentum = 0.9)
 import os 
 
 epochs = 5
+    
 if (os.path.isfile('pretrained/MNIST_net.t7')):
     print ('Loading model')
     model.load_state_dict(torch.load('pretrained/MNIST_net.t7', map_location=lambda storage, loc: storage))
     acc, loss = test(model, 1, criterion, test_loader)
 else:
     print ('Training model')
+    if not os.path.exists("pretrained"):
+	    os.makedirs("pretrained")
     for epoch in range(1, epochs + 1):
         train(model, epoch, criterion, optimizer, train_loader)
         acc, loss = test(model, 1, criterion, test_loader)
