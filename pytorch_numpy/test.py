@@ -248,7 +248,7 @@ if (os.path.isfile('pretrained/MNIST_net.t7')):
 else:
     print ('Training model')
     if not os.path.exists("pretrained"):
-	    os.makedirs("pretrained")
+	os.makedirs("pretrained")
     for epoch in range(1, epochs + 1):
         train(model, epoch, criterion, optimizer, train_loader)
         acc, loss = test(model, 1, criterion, test_loader)
